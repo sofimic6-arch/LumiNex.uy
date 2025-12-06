@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>LumiUY · Iluminación para Autos y Hogares</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card-bg: #020617;
+      --accent: #22c55e;
+      --accent-soft: rgba(34, 197, 94, 0.15);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border: #1e293b;
+      --radius-lg: 18px;
+      --radius-full: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout base */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #4ade80, #22c55e 40%, #15803d 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-links a {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--text-soft);
+      transition: all 0.18s ease;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(148, 163, 184, 0.4);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .nav-cta {
+      padding: 0.45rem 1.05rem;
+      border-radius: var(--radius-full);
+      background: linear-gradient(120deg, #22c55e, #4ade80);
+      color: #022c22;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.55);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 40px rgba(34, 197, 94, 0.8);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.25);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(130deg, #bbf7d0, #4ade80, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-soft);
+      max-width: 36rem;
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-primary {
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      background: radial-gradient(circle at 10% 0, #bbf7d0, #22c55e);
+      color: #022c22;
+      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.75);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 55px rgba(34, 197, 94, 0.9);
+    }
+
+    .btn-ghost {
+      padding: 0.7rem 1.1rem;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(148, 163, 184, 0.65);
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text-soft);
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 0.6rem;
+    }
+
+    .hero-meta strong {
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    /* Hero card derecha */
+    .hero-card {
+      background: radial-gradient(circle at top left, #22c55e11, #020617 55%);
+      border-radius: 24px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      padding: 1.5rem 1.3rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      gap: 0.4rem;
+      align-items: center;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      margin-bottom: 1rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .stat-card {
+      padding: 0.8rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(30, 64, 175, 0.65);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .stat-pill {
+      font-size: 0.7rem;
+      margin-top: 0.35rem;
+      color: #a5b4fc;
+    }
+
+    .hero-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .hero-card-chip {
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-full);
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(74, 222, 128, 0.5);
+      color: #bbf7d0;
+      font-size: 0.75rem;
+    }
+
+    .hero-light-orbit {
+      position: absolute;
+      inset: -30%;
+      background: radial-gradient(circle at 20% -10%, rgba(34, 197, 94, 0.22), transparent 60%);
+      opacity: 0.9;
+      z-index: -1;
+    }
+
+    /* Secciones genéricas */
+    section {
+      padding: 2.5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      max-width: 28rem;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    /* Grilla de productos */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .product-card {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-chip {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-soft);
+      align-self: flex-start;
+      margin-bottom: 0.25rem;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+    }
+
+    .product-meta {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .product-meta span {
+      display: inline-block;
+      margin-right: 0.5rem;
+    }
+
+    .product-provider {
+      font-size: 0.8rem;
+      margin-top: 0.1rem;
+    }
+
+    .product-provider strong {
+      color: #e5e7eb;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .pill-soft {
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #bbf7d0;
+      font-size: 0.75rem;
+    }
+
+    /* Proveedores */
+    .providers-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.1rem;
+    }
+
+    .provider-card {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.75);
+    }
+
+    .provider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .provider-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .provider-type {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--text-soft);
+    }
+
+    .provider-body {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .provider-link {
+      font-size: 0.8rem;
+      color: #a5b4fc;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .provider-link span {
+      font-size: 1.1rem;
+    }
+
+    /* Contacto */
+    .contact-card {
+      margin-top: 1.5rem;
+      padding: 1.2rem 1rem;
+      border-radius: 16px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.85);
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    .contact-label {
+      font-weight: 500;
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .contact-pill {
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.8rem;
+    }
+
+    input[type="text"], input[type="email"], textarea {
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      padding: 0.55rem 0.9rem;
+      color: var(--text);
+      font-size: 0.85rem;
+      outline: none;
+      min-width: 200px;
+    }
+
+    textarea {
+      border-radius: 14px;
+      min-height: 70px;
+      resize: vertical;
+      width: 100%;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #6b7280;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+      padding: 1.5rem 0 2rem;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .footer-row span strong {
+      color: var(--accent);
+    }
+
+    /* Responsivo */
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero {
+        padding-top: 2.6rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        gap: 1.5rem;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">
+          <div class="logo-mark">LU</div>
+          <span>LumiUY</span>
+        </div>
+        <div class="nav-links">
+          <a href="#autos">Iluminación autos</a>
+          <a href="#hogar">Iluminación hogar</a>
+          <a href="#proveedores">Proveedores Uy</a>
+        </div>
+        <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">
+          Pedir cotización
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <div class="container">
+      <section class="hero" id="inicio">
+        <div>
+          <div class="hero-label">
+            <span class="hero-label-dot"></span>
+            Iluminación LED · Uruguay
+          </div>
+          <h1>
+            Todo en <span>iluminación para autos y hogares</span> en un solo lugar.
+          </h1>
+          <p>
+            Catálogo de productos LED para vehículos y casas, pensado para trabajar con proveedores y distribuidores de Uruguay.
+            Usalo como base para tu tienda online o como carta de presentación para tus clientes.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn-primary" onclick="document.getElementById('autos').scrollIntoView({behavior:'smooth'})">
+              Ver productos para autos
+            </button>
+            <button class="btn-ghost" onclick="document.getElementById('hogar').scrollIntoView({behavior:'smooth'})">
+              Iluminación para el hogar →
+            </button>
+          </div>
+          <div class="hero-meta">
+            <div>
+              <strong>Enfoque:</strong><br />
+              LED automotriz y residencial
+            </div>
+            <div>
+              <strong>Ubicación:</strong><br />
+              Proveedores en Uruguay
+            </div>
+            <div>
+              <strong>Ideal para:</strong><br />
+              Tiendas, talleres y estudios de electricidad
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Resumen rápido LumiUY">
+          <div class="hero-light-orbit"></div>
+          <div class="hero-pill">
+            Panel de control · Catálogo 2025
+          </div>
+          <div class="hero-grid">
+            <div class="stat-card">
+              <div class="stat-label">Líneas de producto</div>
+              <div class="stat-value">2</div>
+              <div class="stat-pill">Autos · Hogar</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Tecnología</div>
+              <div class="stat-value">LED</div>
+              <div class="stat-pill">Bajo consumo</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Enfoque autos</div>
+              <div class="stat-value">+Ruta</div>
+              <div class="stat-pill">Faros & barras</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Enfoque hogar</div>
+              <div class="stat-value">+Confort</div>
+              <div class="stat-pill">Interior & exterior</div>
+            </div>
+          </div>
+          <div class="hero-card-footer">
+            <div>Plantilla editable en HTML · Responsive</div>
+            <div class="hero-card-chip">Listo para conectar a tu carrito</div>
+          </div>
+        </aside>
+      </section>
+    </div>
+
+    <!-- PRODUCTOS AUTOS -->
+    <section id="autos">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Catálogo · Autos</div>
+            <h2 class="section-title">Iluminación automotriz</h2>
+            <p class="section-subtitle">
+              Productos pensados para mejorar la visibilidad y estética del vehículo:
+              faros LED, barras off-road, auxiliares y kits para interior. Podés
+              cambiar nombres, precios e imágenes según tu stock real.
+            </p>
+          </div>
+          <div class="pill-soft">
+            Sugerido para talleres, shops y ventas online
+          </div>
+        </div>
+
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <article class="product-card">
+            <div class="product-chip">Faros principales</div>
+            <h3 class="product-title">Kit faros LED H7 6000K</h3>
+            <p class="product-meta">
+              <span>• Luz blanca tipo día</span>
+              <span>• Vida útil &gt; 20.000 h</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Xenon Luces (Montevideo)
+            </p>
+            <div class="product-footer">
+              <span>Ideal para ruta y ciudad.</span>
+              <span class="pill-soft">12V · Plug &amp; Play</span>
+            </div>
+          </article>
+
+          <!-- Producto 2 -->
+          <article class="product-card">
+            <div class="product-chip">Off-road</div>
+            <h3 class="product-title">Barra LED off-road 120W</h3>
+            <p class="product-meta">
+              <span>• Combo spot + flood</span>
+              <span>• Carcasas IP67</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Colorcity / Mayoristas LED
+            </p>
+            <div class="product-footer">
+              <span>Pick-ups, 4x4 y utilitarios.</span>
+              <span class="pill-soft">12V / 24V</span>
+            </div>
+          </article>
+
+          <!-- Producto 3 -->
+          <article class="product-card">
+            <div class="product-chip">Iluminación interior</div>
+            <h3 class="product-title">Kit LED interior RGB con control</h3>
+            <p class="product-meta">
+              <span>• Tiras flexibles</span>
+              <span>• Cambio de color por control</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Salvador Livio / Distribuidor local
+            </p>
+            <div class="product-footer">
+              <span>Personalización de cabina.</span>
+              <span class="pill-soft">12V</span>
+            </div>
+          </article>
+
+          <!-- Producto 4 -->
+          <article class="product-card">
+            <div class="product-chip">Auxiliares & niebla</div>
+            <h3 class="product-title">Faros auxiliares LED 3" redondos</h3>
+            <p class="product-meta">
+              <span>• Cuerpo de aluminio</span>
+              <span>• Haz amplio</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Xenon / LED Light Uy
+            </p>
+            <div class="product-footer">
+              <span>Camionetas, camiones y SUV.</span>
+              <span class="pill-soft">Off-road</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCTOS HOGAR -->
+    <section id="hogar">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Catálogo · Hogar</div>
+            <h2 class="section-title">Iluminación para el hogar</h2>
+            <p class="section-subtitle">
+              Luminarias para interior y exterior: focos, paneles, colgantes decorativos
+              y soluciones solares. Todo preparado para trabajar con proveedores y casas
+              de materiales eléctricos de Uruguay.
+            </p>
+          </div>
+          <div class="pill-soft">
+            Apto para casas, locales y proyectos
+          </div>
+        </div>
+
+        <div class="products-grid">
+          <!-- Producto hogar 1 -->
+          <article class="product-card">
+            <div class="product-chip">Interior · General</div>
+            <h3 class="product-title">Panel LED empotrable 18W</h3>
+            <p class="product-meta">
+              <span>• 3000K / 4000K / 6000K</span>
+              <span>• Bajo consumo</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Lyte / Electro Uruguay
+            </p>
+            <div class="product-footer">
+              <span>Living, dormitorios y oficinas.</span>
+              <span class="pill-soft">220V · Driver incluido</span>
+            </div>
+          </article>
+
+          <!-- Producto hogar 2 -->
+          <article class="product-card">
+            <div class="product-chip">Decorativo</div>
+            <h3 class="product-title">Colgante decorativo 3 luces</h3>
+            <p class="product-meta">
+              <span>• Terminación negra / dorada</span>
+              <span>• Portalámparas E27</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Serlux / Unilux
+            </p>
+            <div class="product-footer">
+              <span>Comedor, barra o isla de cocina.</span>
+              <span class="pill-soft">Diseño moderno</span>
+            </div>
+          </article>
+
+          <!-- Producto hogar 3 -->
+          <article class="product-card">
+            <div class="product-chip">Exterior</div>
+            <h3 class="product-title">Reflector LED 50W IP65</h3>
+            <p class="product-meta">
+              <span>• Luces cálida o fría</span>
+              <span>• Cuerpo de aluminio</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> Iluminarás / Kroser
+            </p>
+            <div class="product-footer">
+              <span>Patios, entradas y fachadas.</span>
+              <span class="pill-soft">Apto intemperie</span>
+            </div>
+          </article>
+
+          <!-- Producto hogar 4 -->
+          <article class="product-card">
+            <div class="product-chip">Decorativo · Detalle</div>
+            <h3 class="product-title">Guirnalda LED tipo luciérnaga</h3>
+            <p class="product-meta">
+              <span>• 5–10 m</span>
+              <span>• Ideal para eventos</span>
+            </p>
+            <p class="product-provider">
+              <strong>Proveedor sugerido:</strong> SilverLed / Electricidad Daniel
+            </p>
+            <div class="product-footer">
+              <span>Galerías, cuartos y vidrieras.</span>
+              <span class="pill-soft">Decoración</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROVEEDORES URUGUAY -->
+    <section id="proveedores">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Aliados · Uruguay</div>
+            <h2 class="section-title">Proveedores sugeridos</h2>
+            <p class="section-subtitle">
+              Lista editable de proveedores y casas de iluminación en Uruguay.
+              Podés reemplazar, agregar o borrar según con quién trabajes realmente.
+            </p>
+          </div>
+          <div class="pill-soft">
+            Usa esto como base para tus acuerdos comerciales
+          </div>
+        </div>
+
+        <div class="providers-layout">
+          <!-- Auto -->
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Xenon Luces</h3>
+              <div class="provider-type">Autos · LED / HID / Xenón</div>
+            </div>
+            <p class="provider-body">
+              Especialistas en kits de luces LED y Xenón para faros principales, faros auxiliares y soluciones de alta
+              potencia para ruta.
+            </p>
+            <a href="https://xenon.com.uy" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> xenon.com.uy
+            </a>
+          </article>
+
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Colorcity</h3>
+              <div class="provider-type">Autos · LED & tuning</div>
+            </div>
+            <p class="provider-body">
+              Tienda con faroles traseros, barras LED, iluminación tuning y accesorios eléctricos para automóvil.
+            </p>
+            <a href="https://colorcity.com.uy" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> colorcity.com.uy
+            </a>
+          </article>
+
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Salvador Livio</h3>
+              <div class="provider-type">Autos · Lamparitas LED</div>
+            </div>
+            <p class="provider-body">
+              Amplia variedad de lámparas y lamparitas LED automotrices para interior, posición, patente y más.
+            </p>
+            <a href="https://www.salvadorlivio.com.uy" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> salvadorlivio.com.uy
+            </a>
+          </article>
+
+          <!-- Hogar -->
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Lyte</h3>
+              <div class="provider-type">Hogar · Proyectos</div>
+            </div>
+            <p class="provider-body">
+              Empresa uruguaya con showrooms y centro de distribución. Especialistas en iluminación LED para proyectos
+              residenciales y comerciales.
+            </p>
+            <a href="https://lyte.com.uy" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> lyte.com.uy
+            </a>
+          </article>
+
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Serlux</h3>
+              <div class="provider-type">Hogar · LED</div>
+            </div>
+            <p class="provider-body">
+              Diseño, desarrollo e importación de luminarias LED: paneles, colgantes, spots y soluciones para interior y
+              exterior.
+            </p>
+            <a href="https://www.serlux.com.uy" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> serlux.com.uy
+            </a>
+          </article>
+
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Electro Uruguay</h3>
+              <div class="provider-type">Material eléctrico · Iluminación</div>
+            </div>
+            <p class="provider-body">
+              Tienda online de materiales eléctricos, iluminación general, reflectores, artefactos para interior y
+              exterior y más.
+            </p>
+            <a href="https://www.electrouruguay.com" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> electrouruguay.com
+            </a>
+          </article>
+
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Unilux</h3>
+              <div class="provider-type">Hogar · LED</div>
+            </div>
+            <p class="provider-body">
+              Tienda enfocada en iluminación LED para el hogar, ideal para complementar proyectos residenciales y
+              locales comerciales.
+            </p>
+            <a href="https://unilux.com.uy" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> unilux.com.uy
+            </a>
+          </article>
+
+          <article class="provider-card">
+            <div class="provider-header">
+              <h3 class="provider-name">Iluminarás</h3>
+              <div class="provider-type">Hogar · Online</div>
+            </div>
+            <p class="provider-body">
+              Marketplace con gran variedad en iluminación para el hogar: guirnaldas, focos, lámparas y soluciones
+              decorativas.
+            </p>
+            <a href="https://iluminaras.com" target="_blank" class="provider-link" rel="noopener">
+              <span>↗</span> iluminaras.com
+            </a>
+          </article>
+        </div>
+
+        <!-- Nota editable -->
+        <div class="contact-card">
+          <div class="contact-row">
+            <span class="contact-label">Nota:</span>
+            <span>
+              Esta lista es solo un ejemplo. Podés dejar solo tus proveedores habituales, sumar tus datos de
+              contacto mayorista o incluso convertir cada tarjeta en un formulario de pedido.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-tag">Contacto</div>
+            <h2 class="section-title">Consultas y pedidos</h2>
+            <p class="section-subtitle">
+              Usá este bloque como formulario básico (luego lo podés conectar a tu sistema, WhatsApp o mailer)
+              para recibir pedidos de clientes.
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-row">
+            <span class="contact-label">Datos de contacto</span>
+            <span class="contact-pill">Tel / WhatsApp: +598 0000 0000</span>
+            <span class="contact-pill">Email: info@lumiuy.com</span>
+          </div>
+          <div class="contact-row">
+            <input type="text" placeholder="Nombre y apellido" />
+            <input type="email" placeholder="Correo electrónico" />
+            <input type="text" placeholder="Tipo de iluminación (auto / hogar / ambos)" />
+          </div>
+          <div class="contact-row" style="flex-direction: column; align-items: flex-start;">
+            <textarea placeholder="Contanos qué productos de iluminación te interesan, modelo de auto o tipo de ambiente a iluminar."></textarea>
+            <button class="btn-primary" style="margin-top: 0.6rem;">Enviar consulta (maqueta)</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <span>© 2025 · <strong>LumiUY</strong> · Plantilla base para iluminación automotriz y residencial.</span>
+        <span>Hecho en Uruguay · Editá libremente este archivo HTML.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
